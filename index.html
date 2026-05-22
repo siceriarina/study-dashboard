@@ -1,736 +1,328 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
-  <title>Study Dashboard</title>
-
-  <style>
-
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-      font-family:Arial, Helvetica, sans-serif;
-    }
-
-    body{
-
-      min-height:100vh;
-
-      display:flex;
-      justify-content:center;
-      align-items:center;
-
-      background:#0f172a;
-
-      color:white;
-
-      padding:20px;
-    }
-
-    .container{
-
-      width:100%;
-      max-width:700px;
-
-    }
-
-    h1{
-
-      text-align:center;
-
-      margin-bottom:20px;
-
-      font-size:40px;
-
-    }
-
-    .card{
-
-      background:#1e293b;
-
-      padding:25px;
-
-      border-radius:20px;
-
-      margin-bottom:20px;
-
-      box-shadow:
-      0 0 20px rgba(0,255,255,0.2);
-
-    }
-
-    h2{
-
-      text-align:center;
-
-      margin-bottom:20px;
-
-    }
-
-    /* CLOCK */
-
-    #clock{
-
-      text-align:center;
-
-      font-size:65px;
-
-      font-weight:bold;
-
-      letter-spacing:2px;
-
-    }
-
-    /* POMODORO */
-
-    #timer{
-
-      text-align:center;
-
-      font-size:70px;
-
-      font-weight:bold;
-
-      margin-bottom:20px;
-
-    }
-
-    .buttons{
-
-      display:flex;
-
-      justify-content:center;
-
-      gap:10px;
-
-      flex-wrap:wrap;
-
-    }
-
-    button{
-
-      border:none;
-
-      padding:12px 20px;
-
-      border-radius:12px;
-
-      cursor:pointer;
-
-      font-size:16px;
-
-      font-weight:bold;
-
-      transition:0.3s;
-
-    }
-
-    button:hover{
-
-      transform:scale(1.05);
-
-    }
-
-    .start-btn{
-
-      background:#22c55e;
-
-      color:white;
-
-    }
-
-    .stop-btn{
-
-      background:#ef4444;
-
-      color:white;
-
-    }
-
-    .reset-btn{
-
-      background:#3b82f6;
-
-      color:white;
-
-    }
-
-    /* PROGRESS BAR */
-
-    .progress-container{
-
-      width:100%;
-
-      height:15px;
-
-      background:#334155;
-
-      border-radius:20px;
-
-      overflow:hidden;
-
-      margin-bottom:20px;
-
-    }
-
-    .progress-bar{
-
-      height:100%;
-
-      width:100%;
-
-      background:linear-gradient(
-      to right,
-      cyan,
-      #22c55e
-      );
-
-      transition:1s linear;
-
-    }
-
-    /* TODO */
-
-    .todo-input{
-
-      display:flex;
-
-      gap:10px;
-
-      margin-bottom:20px;
-
-    }
-
-    input{
-
-      flex:1;
-
-      padding:12px;
-
-      border:none;
-
-      border-radius:12px;
-
-      font-size:16px;
-
-      outline:none;
-
-    }
-
-    .add-btn{
-
-      background:cyan;
-
-      color:black;
-
-    }
-
-    ul{
-
-      list-style:none;
-
-    }
-
-    li{
-
-      background:#334155;
-
-      margin-bottom:10px;
-
-      padding:12px 15px;
-
-      border-radius:12px;
-
-      display:flex;
-
-      justify-content:space-between;
-
-      align-items:center;
-
-      gap:10px;
-
-      animation:fadeIn 0.3s ease;
-
-    }
-
-    @keyframes fadeIn{
-
-      from{
-        opacity:0;
-        transform:translateY(10px);
-      }
-
-      to{
-        opacity:1;
-        transform:translateY(0);
-      }
-
-    }
-
-    .task-text{
-
-      flex:1;
-
-      word-break:break-word;
-
-    }
-
-    .done{
-
-      text-decoration:line-through;
-
-      opacity:0.5;
-
-    }
-
-    .task-buttons{
-
-      display:flex;
-
-      gap:5px;
-
-    }
-
-    .done-btn{
-
-      background:#22c55e;
-
-      color:white;
-
-    }
-
-    .delete-btn{
-
-      background:#ef4444;
-
-      color:white;
-
-    }
-
-    .stats{
-
-      margin-top:15px;
-
-      text-align:center;
-
-      opacity:0.8;
-
-    }
-
-    /* MOBILE */
-
-    @media(max-width:600px){
-
-      #clock{
-        font-size:40px;
-      }
-
-      #timer{
-        font-size:50px;
-      }
-
-      .todo-input{
-        flex-direction:column;
-      }
-
-      h1{
-        font-size:30px;
-      }
-
-    }
-
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Study Dashboard</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial;
+}
+
+body{
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:#0f172a;
+  color:white;
+  padding:20px;
+  transition:0.3s;
+}
+
+.light{
+  background:#f1f5f9;
+  color:black;
+}
+
+.container{
+  width:100%;
+  max-width:700px;
+}
+
+h1{
+  text-align:center;
+  margin-bottom:20px;
+}
+
+.card{
+  background:#1e293b;
+  padding:20px;
+  margin-bottom:15px;
+  border-radius:15px;
+  box-shadow:0 0 15px rgba(0,255,255,0.2);
+}
+
+.light .card{
+  background:white;
+}
+
+.center{
+  text-align:center;
+}
+
+/* CLOCK */
+#clock{
+  font-size:55px;
+  font-weight:bold;
+}
+
+/* TIMER */
+#timer{
+  font-size:60px;
+  font-weight:bold;
+  margin-bottom:10px;
+}
+
+button{
+  padding:10px 15px;
+  border:none;
+  border-radius:10px;
+  margin:5px;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+.start{background:#22c55e;color:white;}
+.stop{background:#ef4444;color:white;}
+.reset{background:#3b82f6;color:white;}
+
+/* TODO */
+.todo{
+  display:flex;
+  gap:10px;
+}
+
+input{
+  flex:1;
+  padding:10px;
+  border:none;
+  border-radius:10px;
+}
+
+ul{
+  list-style:none;
+  margin-top:10px;
+}
+
+li{
+  background:#334155;
+  padding:10px;
+  margin-top:8px;
+  border-radius:10px;
+  display:flex;
+  justify-content:space-between;
+}
+
+.done{
+  text-decoration:line-through;
+  opacity:0.5;
+}
+
+/* top buttons */
+.top-btn{
+  position:fixed;
+  top:15px;
+  right:15px;
+}
+</style>
 </head>
+
 <body>
 
-  <div class="container">
+<button class="top-btn" onclick="toggleTheme()">🌙</button>
 
-    <h1>📚 Study Dashboard</h1>
+<div class="container">
 
-    <!-- CLOCK -->
+<h1>📚 Study Dashboard</h1>
 
-    <div class="card">
+<!-- CLOCK -->
+<div class="card center">
+  <h2>⏰ Clock</h2>
+  <div id="clock">00:00:00</div>
+  <div id="date"></div>
+</div>
 
-      <h2>⏰ Digital Clock</h2>
+<!-- POMODORO -->
+<div class="card center">
+  <h2>🍅 Pomodoro</h2>
+  <div id="timer">25:00</div>
 
-      <div id="clock">
-        00:00:00
-      </div>
+  <button class="start" onclick="start()">Start</button>
+  <button class="stop" onclick="stop()">Stop</button>
+  <button class="reset" onclick="reset()">Reset</button>
+</div>
 
-    </div>
+<!-- TODO -->
+<div class="card">
+  <h2 class="center">📝 To-Do</h2>
 
-    <!-- POMODORO -->
-
-    <div class="card">
-
-      <h2>🍅 Pomodoro Timer</h2>
-
-      <div id="timer">
-        25:00
-      </div>
-
-      <div class="progress-container">
-
-        <div class="progress-bar"
-        id="progressBar"></div>
-
-      </div>
-
-      <div class="buttons">
-
-        <button
-        class="start-btn"
-        onclick="startTimer()">
-
-          Start
-
-        </button>
-
-        <button
-        class="stop-btn"
-        onclick="stopTimer()">
-
-          Stop
-
-        </button>
-
-        <button
-        class="reset-btn"
-        onclick="resetTimer()">
-
-          Reset
-
-        </button>
-
-      </div>
-
-    </div>
-
-    <!-- TODO -->
-
-    <div class="card">
-
-      <h2>📝 To-Do List</h2>
-
-      <div class="todo-input">
-
-        <input
-        type="text"
-        id="taskInput"
-        placeholder="Tambah tugas..."
-        >
-
-        <button
-        class="add-btn"
-        onclick="addTask()">
-
-          Tambah
-
-        </button>
-
-      </div>
-
-      <ul id="taskList"></ul>
-
-      <div class="stats">
-
-        Total Task:
-        <span id="taskCount">0</span>
-
-      </div>
-
-    </div>
-
+  <div class="todo">
+    <input id="taskInput" placeholder="Tulis tugas...">
+    <button onclick="addTask()">Add</button>
   </div>
 
-  <script>
+  <ul id="list"></ul>
 
-    // =========================
-    // DIGITAL CLOCK
-    // =========================
+  <p class="center">🔥 Streak: <span id="streak">0</span> hari</p>
+</div>
 
-    function updateClock(){
+</div>
 
-      const now = new Date();
+<audio id="alarm">
+<source src="https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg">
+</audio>
 
-      let hours =
-      String(now.getHours())
-      .padStart(2,'0');
+<script>
 
-      let minutes =
-      String(now.getMinutes())
-      .padStart(2,'0');
+/* ================= CLOCK ================= */
+function clock(){
+  const now = new Date();
 
-      let seconds =
-      String(now.getSeconds())
-      .padStart(2,'0');
+  document.getElementById("clock").innerText =
+  now.toLocaleTimeString();
 
-      document.getElementById("clock")
-      .innerText =
-      `${hours}:${minutes}:${seconds}`;
+  document.getElementById("date").innerText =
+  now.toLocaleDateString("id-ID", {
+    weekday:"long",
+    year:"numeric",
+    month:"long",
+    day:"numeric"
+  });
+}
+setInterval(clock,1000);
+clock();
 
-    }
+/* ================= POMODORO ================= */
+let total = 25*60;
+let time = total;
+let timer;
+let breakMode = false;
 
-    setInterval(updateClock,1000);
+function updateTimer(){
+  let m = String(Math.floor(time/60)).padStart(2,'0');
+  let s = String(time%60).padStart(2,'0');
+  document.getElementById("timer").innerText = `${m}:${s}`;
+}
 
-    updateClock();
+function start(){
+  clearInterval(timer);
 
-
-    // =========================
-    // POMODORO TIMER
-    // =========================
-
-    let totalTime = 25 * 60;
-
-    let time = totalTime;
-
-    let timer;
-
-    function updateTimer(){
-
-      let minutes =
-      Math.floor(time / 60);
-
-      let seconds =
-      time % 60;
-
-      minutes =
-      String(minutes)
-      .padStart(2,'0');
-
-      seconds =
-      String(seconds)
-      .padStart(2,'0');
-
-      document.getElementById("timer")
-      .innerText =
-      `${minutes}:${seconds}`;
-
-      // progress bar
-
-      const progress =
-      (time / totalTime) * 100;
-
-      document.getElementById("progressBar")
-      .style.width =
-      progress + "%";
-
-    }
-
-    function startTimer(){
-
-      clearInterval(timer);
-
-      timer = setInterval(() => {
-
-        if(time > 0){
-
-          time--;
-
-          updateTimer();
-
-        }else{
-
-          clearInterval(timer);
-
-          alert("🍅 Pomodoro selesai!");
-
-        }
-
-      },1000);
-
-    }
-
-    function stopTimer(){
-
-      clearInterval(timer);
-
-    }
-
-    function resetTimer(){
-
-      clearInterval(timer);
-
-      time = totalTime;
-
+  timer = setInterval(()=>{
+    if(time>0){
+      time--;
       updateTimer();
+    } else {
+      document.getElementById("alarm").play();
 
-    }
-
-    updateTimer();
-
-
-    // =========================
-    // TODO LIST
-    // =========================
-
-    function addTask(){
-
-      const input =
-      document.getElementById("taskInput");
-
-      const text =
-      input.value.trim();
-
-      if(text === "") return;
-
-      createTask(text,false);
-
-      saveTasks();
-
-      updateTaskCount();
-
-      input.value = "";
-
-    }
-
-    function createTask(text,done){
-
-      const li =
-      document.createElement("li");
-
-      li.innerHTML = `
-
-        <span class="task-text">
-          ${text}
-        </span>
-
-        <div class="task-buttons">
-
-          <button class="done-btn">
-            ✓
-          </button>
-
-          <button class="delete-btn">
-            ✕
-          </button>
-
-        </div>
-
-      `;
-
-      const taskText =
-      li.querySelector(".task-text");
-
-      if(done){
-
-        taskText.classList.add("done");
-
+      if(!breakMode){
+        alert("Fokus selesai! Break 5 menit ☕");
+        time = 5*60;
+        breakMode = true;
+      } else {
+        alert("Break selesai! Fokus lagi 🍅");
+        time = total;
+        breakMode = false;
       }
-
-      // tombol selesai
-
-      li.querySelector(".done-btn")
-      .addEventListener("click", () => {
-
-        taskText.classList.toggle("done");
-
-        saveTasks();
-
-      });
-
-      // tombol hapus
-
-      li.querySelector(".delete-btn")
-      .addEventListener("click", () => {
-
-        li.remove();
-
-        saveTasks();
-
-        updateTaskCount();
-
-      });
-
-      document.getElementById("taskList")
-      .appendChild(li);
-
+      updateTimer();
     }
+  },1000);
+}
 
-    // ENTER KEY
+function stop(){
+  clearInterval(timer);
+}
 
-    document.getElementById("taskInput")
-    .addEventListener("keypress", function(e){
+function reset(){
+  clearInterval(timer);
+  time = total;
+  breakMode = false;
+  updateTimer();
+}
+updateTimer();
 
-      if(e.key === "Enter"){
+/* ================= TODO ================= */
+function addTask(){
+  const input = document.getElementById("taskInput");
+  let text = input.value.trim();
+  if(text==="") return;
 
-        addTask();
+  const li = document.createElement("li");
 
-      }
+  li.innerHTML = `
+  <span>${text}</span>
+  <div>
+    <button onclick="doneTask(this)">✔</button>
+    <button onclick="deleteTask(this)">✖</button>
+  </div>`;
 
+  document.getElementById("list").appendChild(li);
+
+  input.value="";
+  save();
+}
+
+function doneTask(btn){
+  btn.parentElement.parentElement
+  .querySelector("span")
+  .classList.toggle("done");
+
+  save();
+}
+
+function deleteTask(btn){
+  btn.parentElement.parentElement.remove();
+  save();
+}
+
+function save(){
+  let data = [];
+  document.querySelectorAll("#list li").forEach(li=>{
+    data.push({
+      text: li.querySelector("span").innerText,
+      done: li.querySelector("span").classList.contains("done")
     });
+  });
 
-    // SAVE TASKS
+  localStorage.setItem("tasks", JSON.stringify(data));
+}
 
-    function saveTasks(){
+/* load */
+function load(){
+  let data = JSON.parse(localStorage.getItem("tasks")) || [];
 
-      const tasks = [];
+  data.forEach(t=>{
+    const li = document.createElement("li");
 
-      document.querySelectorAll("#taskList li")
-      .forEach(li => {
+    li.innerHTML = `
+    <span class="${t.done?'done':''}">${t.text}</span>
+    <div>
+      <button onclick="doneTask(this)">✔</button>
+      <button onclick="deleteTask(this)">✖</button>
+    </div>`;
 
-        tasks.push({
+    document.getElementById("list").appendChild(li);
+  });
+}
+load();
 
-          text:
-          li.querySelector(".task-text")
-          .innerText,
+/* ================= STREAK ================= */
+function streak(){
+  let last = localStorage.getItem("last");
+  let today = new Date().toDateString();
 
-          done:
-          li.querySelector(".task-text")
-          .classList.contains("done")
+  let s = parseInt(localStorage.getItem("streak")) || 0;
 
-        });
+  if(last !== today){
+    s++;
+    localStorage.setItem("streak", s);
+    localStorage.setItem("last", today);
+  }
 
-      });
+  document.getElementById("streak").innerText = s;
+}
+streak();
 
-      localStorage.setItem(
-        "tasks",
-        JSON.stringify(tasks)
-      );
+/* ================= THEME ================= */
+function toggleTheme(){
+  document.body.classList.toggle("light");
+}
 
-    }
-
-    // LOAD TASKS
-
-    function loadTasks(){
-
-      const savedTasks =
-      JSON.parse(
-        localStorage.getItem("tasks")
-      ) || [];
-
-      savedTasks.forEach(task => {
-
-        createTask(
-          task.text,
-          task.done
-        );
-
-      });
-
-      updateTaskCount();
-
-    }
-
-    // TASK COUNT
-
-    function updateTaskCount(){
-
-      const total =
-      document.querySelectorAll("#taskList li")
-      .length;
-
-      document.getElementById("taskCount")
-      .innerText = total;
-
-    }
-
-    loadTasks();
-
-  </script>
+</script>
 
 </body>
 </html>
