@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
   <title>Study Dashboard</title>
 
   <style>
@@ -15,6 +16,7 @@
     }
 
     body{
+
       min-height:100vh;
 
       display:flex;
@@ -22,90 +24,184 @@
       align-items:center;
 
       background:#0f172a;
+
       color:white;
 
       padding:20px;
     }
 
     .container{
+
       width:100%;
       max-width:700px;
-    }
 
-    .card{
-      background:#1e293b;
-
-      padding:25px;
-      margin-bottom:20px;
-
-      border-radius:20px;
-
-      box-shadow:
-      0 0 20px rgba(0,255,255,0.2);
     }
 
     h1{
+
       text-align:center;
+
       margin-bottom:20px;
+
+      font-size:40px;
+
+    }
+
+    .card{
+
+      background:#1e293b;
+
+      padding:25px;
+
+      border-radius:20px;
+
+      margin-bottom:20px;
+
+      box-shadow:
+      0 0 20px rgba(0,255,255,0.2);
+
     }
 
     h2{
-      margin-bottom:15px;
+
       text-align:center;
+
+      margin-bottom:20px;
+
     }
 
     /* CLOCK */
 
     #clock{
-      font-size:60px;
-      font-weight:bold;
+
       text-align:center;
+
+      font-size:65px;
+
+      font-weight:bold;
+
+      letter-spacing:2px;
+
     }
 
-    /* TIMER */
+    /* POMODORO */
 
     #timer{
-      font-size:70px;
+
       text-align:center;
-      margin-bottom:20px;
+
+      font-size:70px;
+
       font-weight:bold;
+
+      margin-bottom:20px;
+
     }
 
     .buttons{
+
       display:flex;
+
       justify-content:center;
+
       gap:10px;
+
       flex-wrap:wrap;
+
     }
 
     button{
 
+      border:none;
+
       padding:12px 20px;
 
-      border:none;
-      border-radius:10px;
+      border-radius:12px;
 
       cursor:pointer;
 
-      background:cyan;
-      color:black;
-
       font-size:16px;
+
       font-weight:bold;
 
       transition:0.3s;
+
     }
 
     button:hover{
+
       transform:scale(1.05);
+
+    }
+
+    .start-btn{
+
+      background:#22c55e;
+
+      color:white;
+
+    }
+
+    .stop-btn{
+
+      background:#ef4444;
+
+      color:white;
+
+    }
+
+    .reset-btn{
+
+      background:#3b82f6;
+
+      color:white;
+
+    }
+
+    /* PROGRESS BAR */
+
+    .progress-container{
+
+      width:100%;
+
+      height:15px;
+
+      background:#334155;
+
+      border-radius:20px;
+
+      overflow:hidden;
+
+      margin-bottom:20px;
+
+    }
+
+    .progress-bar{
+
+      height:100%;
+
+      width:100%;
+
+      background:linear-gradient(
+      to right,
+      cyan,
+      #22c55e
+      );
+
+      transition:1s linear;
+
     }
 
     /* TODO */
 
     .todo-input{
+
       display:flex;
+
       gap:10px;
+
       margin-bottom:20px;
+
     }
 
     input{
@@ -115,39 +211,116 @@
       padding:12px;
 
       border:none;
-      border-radius:10px;
+
+      border-radius:12px;
 
       font-size:16px;
+
+      outline:none;
+
+    }
+
+    .add-btn{
+
+      background:cyan;
+
+      color:black;
+
     }
 
     ul{
+
       list-style:none;
+
     }
 
     li{
 
       background:#334155;
 
-      padding:12px 15px;
-
-      border-radius:10px;
-
       margin-bottom:10px;
 
+      padding:12px 15px;
+
+      border-radius:12px;
+
       display:flex;
+
       justify-content:space-between;
+
       align-items:center;
+
+      gap:10px;
+
+      animation:fadeIn 0.3s ease;
+
     }
 
-    .delete-btn{
-      background:tomato;
-      color:white;
+    @keyframes fadeIn{
+
+      from{
+        opacity:0;
+        transform:translateY(10px);
+      }
+
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+
+    }
+
+    .task-text{
+
+      flex:1;
+
+      word-break:break-word;
+
     }
 
     .done{
+
       text-decoration:line-through;
-      opacity:0.6;
+
+      opacity:0.5;
+
     }
+
+    .task-buttons{
+
+      display:flex;
+
+      gap:5px;
+
+    }
+
+    .done-btn{
+
+      background:#22c55e;
+
+      color:white;
+
+    }
+
+    .delete-btn{
+
+      background:#ef4444;
+
+      color:white;
+
+    }
+
+    .stats{
+
+      margin-top:15px;
+
+      text-align:center;
+
+      opacity:0.8;
+
+    }
+
+    /* MOBILE */
 
     @media(max-width:600px){
 
@@ -163,6 +336,10 @@
         flex-direction:column;
       }
 
+      h1{
+        font-size:30px;
+      }
+
     }
 
   </style>
@@ -171,9 +348,10 @@
 
   <div class="container">
 
-    <h1>Study Dashboard</h1>
+    <h1>📚 Study Dashboard</h1>
 
     <!-- CLOCK -->
+
     <div class="card">
 
       <h2>⏰ Digital Clock</h2>
@@ -185,6 +363,7 @@
     </div>
 
     <!-- POMODORO -->
+
     <div class="card">
 
       <h2>🍅 Pomodoro Timer</h2>
@@ -193,18 +372,37 @@
         25:00
       </div>
 
+      <div class="progress-container">
+
+        <div class="progress-bar"
+        id="progressBar"></div>
+
+      </div>
+
       <div class="buttons">
 
-        <button onclick="startTimer()">
+        <button
+        class="start-btn"
+        onclick="startTimer()">
+
           Start
+
         </button>
 
-        <button onclick="stopTimer()">
+        <button
+        class="stop-btn"
+        onclick="stopTimer()">
+
           Stop
+
         </button>
 
-        <button onclick="resetTimer()">
+        <button
+        class="reset-btn"
+        onclick="resetTimer()">
+
           Reset
+
         </button>
 
       </div>
@@ -212,6 +410,7 @@
     </div>
 
     <!-- TODO -->
+
     <div class="card">
 
       <h2>📝 To-Do List</h2>
@@ -219,18 +418,29 @@
       <div class="todo-input">
 
         <input
-          type="text"
-          id="taskInput"
-          placeholder="Tambah tugas..."
+        type="text"
+        id="taskInput"
+        placeholder="Tambah tugas..."
         >
 
-        <button onclick="addTask()">
+        <button
+        class="add-btn"
+        onclick="addTask()">
+
           Tambah
+
         </button>
 
       </div>
 
       <ul id="taskList"></ul>
+
+      <div class="stats">
+
+        Total Task:
+        <span id="taskCount">0</span>
+
+      </div>
 
     </div>
 
@@ -246,15 +456,20 @@
 
       const now = new Date();
 
-      let hours = now.getHours();
-      let minutes = now.getMinutes();
-      let seconds = now.getSeconds();
+      let hours =
+      String(now.getHours())
+      .padStart(2,'0');
 
-      hours = String(hours).padStart(2,'0');
-      minutes = String(minutes).padStart(2,'0');
-      seconds = String(seconds).padStart(2,'0');
+      let minutes =
+      String(now.getMinutes())
+      .padStart(2,'0');
 
-      document.getElementById("clock").innerText =
+      let seconds =
+      String(now.getSeconds())
+      .padStart(2,'0');
+
+      document.getElementById("clock")
+      .innerText =
       `${hours}:${minutes}:${seconds}`;
 
     }
@@ -268,7 +483,9 @@
     // POMODORO TIMER
     // =========================
 
-    let time = 25 * 60;
+    let totalTime = 25 * 60;
+
+    let time = totalTime;
 
     let timer;
 
@@ -280,15 +497,26 @@
       let seconds =
       time % 60;
 
-      minutes = String(minutes)
+      minutes =
+      String(minutes)
       .padStart(2,'0');
 
-      seconds = String(seconds)
+      seconds =
+      String(seconds)
       .padStart(2,'0');
 
       document.getElementById("timer")
       .innerText =
       `${minutes}:${seconds}`;
+
+      // progress bar
+
+      const progress =
+      (time / totalTime) * 100;
+
+      document.getElementById("progressBar")
+      .style.width =
+      progress + "%";
 
     }
 
@@ -308,7 +536,7 @@
 
           clearInterval(timer);
 
-          alert("Pomodoro selesai!");
+          alert("🍅 Pomodoro selesai!");
 
         }
 
@@ -326,7 +554,7 @@
 
       clearInterval(timer);
 
-      time = 25 * 60;
+      time = totalTime;
 
       updateTimer();
 
@@ -344,56 +572,85 @@
       const input =
       document.getElementById("taskInput");
 
-      const text = input.value.trim();
+      const text =
+      input.value.trim();
 
       if(text === "") return;
+
+      createTask(text,false);
+
+      saveTasks();
+
+      updateTaskCount();
+
+      input.value = "";
+
+    }
+
+    function createTask(text,done){
 
       const li =
       document.createElement("li");
 
       li.innerHTML = `
 
-        <span>${text}</span>
+        <span class="task-text">
+          ${text}
+        </span>
 
-        <div>
+        <div class="task-buttons">
 
           <button class="done-btn">
             ✓
           </button>
 
           <button class="delete-btn">
-            Hapus
+            ✕
           </button>
 
         </div>
 
       `;
 
+      const taskText =
+      li.querySelector(".task-text");
+
+      if(done){
+
+        taskText.classList.add("done");
+
+      }
+
       // tombol selesai
+
       li.querySelector(".done-btn")
       .addEventListener("click", () => {
 
-        li.querySelector("span")
-        .classList.toggle("done");
+        taskText.classList.toggle("done");
+
+        saveTasks();
 
       });
 
       // tombol hapus
+
       li.querySelector(".delete-btn")
       .addEventListener("click", () => {
 
         li.remove();
+
+        saveTasks();
+
+        updateTaskCount();
 
       });
 
       document.getElementById("taskList")
       .appendChild(li);
 
-      input.value = "";
-
     }
 
-    // ENTER untuk tambah task
+    // ENTER KEY
 
     document.getElementById("taskInput")
     .addEventListener("keypress", function(e){
@@ -405,6 +662,73 @@
       }
 
     });
+
+    // SAVE TASKS
+
+    function saveTasks(){
+
+      const tasks = [];
+
+      document.querySelectorAll("#taskList li")
+      .forEach(li => {
+
+        tasks.push({
+
+          text:
+          li.querySelector(".task-text")
+          .innerText,
+
+          done:
+          li.querySelector(".task-text")
+          .classList.contains("done")
+
+        });
+
+      });
+
+      localStorage.setItem(
+        "tasks",
+        JSON.stringify(tasks)
+      );
+
+    }
+
+    // LOAD TASKS
+
+    function loadTasks(){
+
+      const savedTasks =
+      JSON.parse(
+        localStorage.getItem("tasks")
+      ) || [];
+
+      savedTasks.forEach(task => {
+
+        createTask(
+          task.text,
+          task.done
+        );
+
+      });
+
+      updateTaskCount();
+
+    }
+
+    // TASK COUNT
+
+    function updateTaskCount(){
+
+      const total =
+      document.querySelectorAll("#taskList li")
+      .length;
+
+      document.getElementById("taskCount")
+      .innerText = total;
+
+    }
+
+    loadTasks();
 
   </script>
 
